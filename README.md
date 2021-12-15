@@ -1,5 +1,5 @@
 # Data-Analyst-Study
-Data-Analyst-Study 기록 
+Data-Analyst-Study 기록입니다. 
 
 
 # SQL

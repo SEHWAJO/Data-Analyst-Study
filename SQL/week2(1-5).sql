@@ -13,3 +13,11 @@ from customer c left outer join address a
 on c.address_id = a.address_id
 Left outer join city c2 
 on a.city_id = c2.city_id 
+
+-- 문제3번) Lima City에 사는 고객의 이름과, 성, 이메일, phonenumber에 대해서 알려주세요.
+
+SELECT c.first_name, c.last_name, c.email, a.phone 
+FROM customer c 
+Left outer join address a on c.address_id = a.address_id
+Left outer join city c2 on a.city_id = c2.city_id 
+WHERE c2.city = 'Lima'

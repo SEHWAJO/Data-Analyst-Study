@@ -38,3 +38,13 @@ from customer c
 left outer join address a on c.address_id = a.address_id 
 left outer join city c2 on a.city_id = c2.city_id 
 where c.email = 'seth.hannon@sakilacustomer.org'
+
+-- 문제6번) Jon Stephens 직원을 통해 dvd대여를 한 payment 기록 정보를 확인하려고 합니다.
+-- payment_id, 고객 이름 과 성, rental_id, amount, staff 이름과 성을 알려주세요.
+
+SELECT p.payment_id, c.first_name, c.last_name, p.rental_id, p.amount, s.first_name, s.last_name 
+FROM staff s left outer join payment p 
+on s.staff_id = p.staff_id 
+left outer join customer c 
+on p.customer_id = c.customer_id 
+where s.first_name = 'Jon'and s.last_name = 'Stephens'

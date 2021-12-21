@@ -30,3 +30,11 @@ s.first_name , s.last_name
 from rental r
 left outer join customer c on r.customer_id  =  c.customer_id
 left outer join staff s on r.staff_id  = s.staff_id
+
+-- 문제5번) seth.hannon@sakilacustomer.org 이메일 주소를 가진 고객의 주소 address, address2, postal_code, phone, city 주소를 알려주세요.
+
+select a.address , a.address2 , a.postal_code , a.phone, c2.city_id 
+from customer c
+left outer join address a on c.address_id = a.address_id 
+left outer join city c2 on a.city_id = c2.city_id 
+where c.email = 'seth.hannon@sakilacustomer.org'

@@ -21,3 +21,12 @@ FROM customer c
 Left outer join address a on c.address_id = a.address_id
 Left outer join city c2 on a.city_id = c2.city_id 
 WHERE c2.city = 'Lima'
+
+-- 문제4번) rental 정보에 추가로, 고객의 이름과, 직원의 이름을 함께 보여주세요.
+
+select r.*,
+c.first_name , c.last_name ,
+s.first_name , s.last_name
+from rental r
+left outer join customer c on r.customer_id  =  c.customer_id
+left outer join staff s on r.staff_id  = s.staff_id

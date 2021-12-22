@@ -57,8 +57,6 @@ from film f left outer join film_actor f2
 on f.film_id = f2.film_id 
 where actor_id is Null
 
-
-
 -- 문제8번) store 상점 id별 주소 (address, address2, distict) 와 해당 상점이 위치한 city 주소를 알려주세요.
 
 select s.store_id, a.address, a.address2, a.district, c.city 
@@ -66,7 +64,6 @@ from store s left outer join address a
 on s.address_id = a.address_id
 left outer join city c 
 on a.city_id = c.city_id 
-
 
 -- 문제9번) 고객의 id 별로 고객의 이름 (first_name, last_name), 이메일, 고객의 주소 (address, district), phone번호, city, country 를 알려주세요.
 
@@ -79,7 +76,6 @@ left outer join country c3
 on c2.country_id = c3.country_id 
 
 -- 문제10번) country 가 china 가 아닌 지역에 사는, 고객의 이름(first_name, last_name)과 , email, phonenumber, country, city 를 알려주세요
-
 
 select c.first_name, c.last_name, c.email, a.phone, c2.city, c3.country 
 from customer c left outer join address a 

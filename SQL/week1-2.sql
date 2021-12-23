@@ -142,3 +142,4 @@ where last_name like ‘%John%'
 select *
 from address
 where address2 is null
+

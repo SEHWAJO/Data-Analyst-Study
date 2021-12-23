@@ -74,3 +74,71 @@ and amount between 1 and 3
 select customer_id, first_name, last_name 
 from customer c 
 where first_name in ('Maria', 'Lisa', 'Mike')
+
+
+-- 문제11번) film 테이블을 이용하여, film의 길이가 100~120 에 해당하거나 또는 rental 대여기간이 3~5일에 해당하는 film 의 모든 정보를 확인해주세요.
+
+select *
+from film
+where length between 100 and 120
+and rental_duration between 3 and 5
+
+
+-- 문제12번) address 테이블을 이용하여, postal_code 값이 공백('') 이거나 35200, 17886 에 해당하는 address 에 모든 정보를 확인해주세요.
+
+
+select *
+from address
+where postal_code in ('', '35200', '17886')
+
+
+-- 문제13번) address 테이블을 이용하여, address 의 상세주소(=address2) 값이 존재하지 않는 모든 데이터를 확인하여 주세요.
+
+select *
+from address
+where address2 is null
+
+
+-- 문제14번) staff 테이블을 이용하여, staff 의 picture 사진의 값이 있는 직원의 id, 이름,성을 확인해주세요. 단 이름과 성을 하나의 컬럼으로 이름, 성의형태로 새로운 컬럼 name 컬럼으로 도출해주세요.
+|| : 쌍 파이프는 문자열이나 컬럼을 합쳐주는 역할을 한다.
+
+select staff_id, first_name ||','|| last_name , last_name as name
+from staff
+where picture is not null
+
+
+
+-- 문제15번) rental 테이블을 이용하여, 대여는했으나 아직 반납 기록이 없는 대여건의 모든 정보를 확인해주세요.
+—- where  rental_date is not null 이 줄은 쓰지 않아도 됨. rental_date가 null인 row는 없으니까
+
+select *
+from rental
+where return_date is null
+
+
+
+-- 문제16번) address 테이블을 이용하여, postal_code 값이 빈 값(NULL) 이거나 35200, 17886 에 해당하는 address 에 모든 정보를 확인해주세요.
+-— 모범답안
+select *
+from address
+where postal_code in ('35200','17886') or postal_code is null
+
+
+—- 이렇게도 가능
+select *
+from address
+where postal_code in (null, '35200', '17886')
+
+
+-- 문제17번) 고객의 성에 John 이라는 단어가 들어가는, 고객의 이름과 성을 모두 찾아주세요.
+
+select fisrt_name, last_name
+from customer
+where last_name like ‘%John%'
+
+
+-- 문제18번) 주소 테이블에서, address2 값이 null 값인 row 전체를 확인해볼까요
+
+select *
+from address
+where address2 is null

@@ -86,4 +86,37 @@ left outer join country c3
 on c2.country_id = c3.country_id
 where c3.country not in ('China')
 
+-- 문제11번) Horror 카테고리 장르에 해당하는 영화의 이름과 description 에 대해서 알려주세요
+
+select f.title, f.description 
+from category c left outer join film_category fc 
+on c.category_id = fc.category_id 
+left outer join film f 
+on fc.film_id = f.film_id 
+where name = 'Horror'
+
+-- 문제12번) Music 장르이면서, 영화길이가 60~180분 사이에 해당하는 영화의 title, description, length 를 알려주세요.
+* 영화 길이가 짧은 순으로 정렬해서 알려주세요.
+
+select  title, description, length 
+from category c left outer join film_category fc 
+on c.category_id = fc.category_id 
+left outer join film f 
+on fc.film_id = f.film_id 
+where name = 'Music'
+and f.length between 60 and 180
+order by length
+
+
+-- 문제13번) actor 테이블을 이용하여, 배우의 ID, 이름, 성 컬럼에 추가로 'Angels Life' 영화에 나온 영화 배우 여부를 Y , N 으로 컬럼을 추가 표기해주세요. 해당 컬럼은 angelslife_flag로 만들어주세요.
+
+select actor_id, first_name, last_name, case when a.actor_id in (select actor_id
+from film f
+inner join film_actor fa 
+on f.film_id  = fa.film_id
+where f.title ='Angels Life') then 'Y'
+else 'N'
+end as Angelslife_flag
+from actor a;
+
 

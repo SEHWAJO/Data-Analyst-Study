@@ -119,4 +119,16 @@ else 'N'
 end as Angelslife_flag
 from actor a;
 
+-- 문제14번) 대여일자가 2005-06-01~ 14일에 해당하는 주문 중에서 , 직원의 이름(이름 성) = 'Mike Hillyer' 이거나 고객의 이름이 (이름 성) ='Gloria Cook' 에 해당 하는 rental 의 모든 정보를 알려주세요.
+* 추가로 직원이름과, 고객이름에 대해서도 fullname 으로 구성해서 알려주세요.
 
+select r.*,
+c.first_name , c.last_name ,
+s.first_name , s.last_name
+from rental r 	
+left outer join customer as c on r.customer_id  =  c.customer_id
+left outer join staff s on r.staff_id  = s.staff_id
+where 
+(s.first_name || ' ' || s.last_name = 'Mike Hillyer'
+or c.first_name || ' ' || c.last_name = 'Gloria Cook')
+and date(rental_date) between '2005-06-01' and '2005-06-14'

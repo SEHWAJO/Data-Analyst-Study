@@ -1,3 +1,6 @@
+-- 2주차 실습문제 (3)
+
+
 -- 문제1번) 고객의 기본 정보인, 고객 id, 이름, 성, 이메일과 함께 고객의 주소 address, district, postal_code, phone 번호를 함께 보여주세요.
 -- join은 inner join과 같다.
 
@@ -146,3 +149,47 @@ left outer join staff s
 on r.staff_id = s.staff_id 
 where s.first_name || ' ' || s.last_name not in ('Mike Hillyer')
 and date(rental_date) between '2005-06-01' and '2005-06-14'
+
+
+-- 2주차 실습문제 (4)
+
+-- 문제1번) store 별로 staff는 몇명이 있는지 확인해주세요.
+
+select store_id, count(*)
+from staff
+group by store_id;
+
+
+-- 문제2번) 영화등급(rating) 별로 몇개 영화film을 가지고 있는지 확인해주세요.
+
+select rating, count(film_id)
+from film
+group by rating
+
+-- 문제3번) 출현한 영화배우(actor)가 10명 초과한 영화명은 무엇인가요?
+
+select f.title, fc.count
+from 
+(
+select fa.film_id , count(actor_id) as count
+from film_actor fa
+group by fa.film_id
+having count(actor_id) > 10
+) fc
+inner join film f
+on fc.film_id = f.film_id 
+;
+
+
+-- 문제4번) 영화 배우(actor)들이 출연한 영화는 각각 몇 편인가요?
+-- 영화 배우의 이름 , 성 과 함께 출연 영화 수를 알려주세요.
+
+select a.first_name, a.last_name, fa.count
+from 
+(select actor_id , count(film_id) as count
+from film_actor
+group by actor_id) fa
+inner join actor a
+on fa.actor_id = a.actor_id;
+
+

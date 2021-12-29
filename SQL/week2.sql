@@ -192,4 +192,14 @@ group by actor_id) fa
 inner join actor a
 on fa.actor_id = a.actor_id;
 
+-- 문제5번) 국가(country)별 고객(customer) 는 몇명인가요?
+
+select c3.country, count(c.customer_id) 
+from customer c 
+inner join address a on c.address_id = a.address_id 
+inner join city c2 on a.city_id = c2.city_id
+inner join country c3 on c2.country_id = c3.country_id 
+group by c3.country
+
+
 

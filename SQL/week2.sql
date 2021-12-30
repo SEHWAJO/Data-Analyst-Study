@@ -203,3 +203,55 @@ group by c3.country
 
 
 
+
+-- 문제6번) 영화 재고 (inventory) 수량이 3개 이상인 영화(film) 는?
+* store는 상관 없이 확인해주세요.
+
+
+select f.title, i.cnt
+from
+(select film_id, count(*) cnt
+from inventory i 
+group by film_id 
+having count(*) > 3) i
+inner join film f 
+on f.film_id = i.film_id;
+
+
+-- 문제7번) dvd 대여를 제일 많이한 고객 이름은?
+
+-- 답안
+select c.first_name, c.last_name 
+from customer c inner join
+(select p.customer_id, count(p.rental_id)
+from payment p 
+group by p.customer_id 
+order by count(p.rental_id) desc 
+limit 1) p
+on c.customer_id = p.customer_id;
+
+-- 내 답안
+select c.first_name, c.last_name, count(rental_id)
+from rental r left outer join customer c 
+on r.customer_id = c.customer_id 
+group by c.customer_id 
+order by count(rental_id) desc
+limit 1
+
+-- 문제8번) rental 테이블을 기준으로, 2005년 5월26일에 대여를 기록한 고객 중, 하루에 2번 이상 대여를 한 고객의 ID 값을 확인해주세요.
+
+select customer_id, count(distinct rental_id)
+from rental 
+where date(rental_date) = '2005-05-26'
+group by customer_id
+having count(distinct rental_id) >= 2
+
+-- 문제9번) film_actor 테이블을 기준으로, 출현한 영화의 수가 많은 5명의 actor_id 와 , 출현한 영화 수 를 알려주세요.
+
+select fa.actor_id, count(distinct film_id) film_cnt
+from film_actor fa 
+group by fa.actor_id 
+order by film_cnt desc
+limit 5
+
+

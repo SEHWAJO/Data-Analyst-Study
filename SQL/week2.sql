@@ -254,4 +254,27 @@ group by fa.actor_id
 order by film_cnt desc
 limit 5
 
+--문제10번) payment 테이블을 기준으로, 결제일자가 2007년2월15일에 해당 하는 주문 중에서 , 하루에 2건 이상 주문한 고객의 총 결제 금액이 10달러 이상인 고객에 대해서 알려주세요. (고객의 id, 주문건수 , 총 결제 금액까지 알려주세요)
+
+select customer_id, count(distinct rental_id) as cnt, sum(amount)
+from payment
+where payment_date between '2007-02-15 00:00:00' and '2007-02-15 23:59:59'
+group by customer_id
+having count(distinct rental_id) >= 2 and sum(amount) >=10
+
+
+--문제11번) 사용되는 언어별 영화 수는?
+
+select l.name, count(*)
+from film f inner join "language" l 
+on f.language_id = l.language_id 
+group by l.name
+
+--문제12번) 40편 이상 출연한 영화 배우(actor) 는 누구인가요?
+
+select a.first_name, a.last_name, count(fa.film_id)
+from actor a inner join film_actor fa
+on a.actor_id = fa.actor_id 
+group by a.actor_id
+having count(fa.film_id) > 40
 

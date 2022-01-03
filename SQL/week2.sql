@@ -278,3 +278,22 @@ on a.actor_id = fa.actor_id
 group by a.actor_id
 having count(fa.film_id) > 40
 
+-- 문제13번) 고객 등급별 고객 수를 구하세요. (대여 금액 혹은 매출액 에 따라 고객 등급을 나누고 조건은 아래와 같습니다.) /* A 등급은 151 이상 B 등급은 101 이상 150 이하 C 등급은 51 이상 100 이하 D 등급은 50 이하
+* 대여 금액의 소수점은 반올림 하세요.
+HINT 반올림 하는 함수는 ROUND 입니다. */
+
+select
+case when rental_amount <= 50 then 'D'
+when rental_amount between 51 and 100 then 'C'
+when rental_amount between 101 and 150 then 'B'
+when rental_amount >= 151 then 'A' 
+end customer_class, count(*) cnt
+from
+(select r.customer_id, round(sum(p.amount), 0) rental_amount
+from rental r inner join payment p 
+on p.rental_id = r.rental_id 
+group by r.customer_id) r
+group by case when rental_amount <= 50 then 'D'
+when rental_amount between 51 and 100 then 'C'
+when rental_amount between 101 and 150 then 'B'
+when rental_amount >= 151 then 'A' end

@@ -33,3 +33,11 @@ inner join country c3 on c3.country_id = c2.country_id
 group by rollup (c3.country, c2.city)
 order by c3.country, c2.city
 ;
+
+
+--문제5번) 영화배우별로 출연한 영화 count 수 와, 모든 배우의 전체 출연 영화 수를 합산 해서 함께 보여주세요.
+
+select actor_id, count(*)
+from film_actor fa 
+group by rollup(actor_id)
+;

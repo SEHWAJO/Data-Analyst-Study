@@ -41,3 +41,13 @@ select actor_id, count(*)
 from film_actor fa 
 group by rollup(actor_id)
 ;
+
+--문제6번) 국가 (Country)별, 도시(City)별 고객의 수와 , 전체 국가별 고객의 수를 함께 보여주세요. (grouping sets)
+
+select c2.country, ct.city, count(distinct customer_id)
+from customer c 
+inner join address a on a.address_id = c.address_id 
+inner join city ct on ct.city_id = a.city_id 
+inner join country c2 on c2.country_id = ct.country_id 
+group by grouping sets ((c2.country, ct.city), (c2.country))
+order by c2.country , ct.city;

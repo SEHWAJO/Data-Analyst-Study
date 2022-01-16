@@ -51,3 +51,10 @@ inner join city ct on ct.city_id = a.city_id
 inner join country c2 on c2.country_id = ct.country_id 
 group by grouping sets ((c2.country, ct.city), (c2.country))
 order by c2.country , ct.city;
+
+--문제7번) 영화에서 사용한 언어와 영화 개봉 연도 에 대한 영화 갯수와 , 영화 개봉 연도에 대한 영화 갯수를 함께 보여주세요.
+
+select language_id, release_year , count(film_id)
+from film f 
+group by grouping sets ((language_id, release_year), (release_year) 
+;

@@ -58,3 +58,20 @@ select language_id, release_year , count(film_id)
 from film f 
 group by grouping sets ((language_id, release_year), (release_year) 
 ;
+                        
+--문제8번) 연도별, 일별 결제 수량과, 연도별 결제 수량을 함께 보여주세요.
+* 결제수량은 결제 의 id 갯수 를 의미합니다.
+* 
+select substring(cast(payment_date as varchar), 1,4) as year,
+substring(cast(payment_date as varchar),1,10) as date, 
+count(payment_id) as cnt 
+from payment p
+group by grouping sets (
+(substring(cast(payment_date as varchar), 1,4), substring(cast(payment_date as varchar), 1,10)), substring(cast(payment_date as varchar), 1,4));
+
+--문제9번) 지점 별, active 고객의 수와 , active 고객 수 를 함께 보여주세요. 지점과, active 여부에 대해서는 customer 테이블을 이용하여 보여주세요.
+--grouping sets 를 이용해서 풀이해주세요.
+
+select store_id, active, count(customer_id)
+from customer c 
+group by grouping sets((store_id, active), (active));

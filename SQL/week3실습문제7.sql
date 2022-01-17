@@ -60,8 +60,8 @@ group by grouping sets ((language_id, release_year), (release_year)
 ;
                         
 --문제8번) 연도별, 일별 결제 수량과, 연도별 결제 수량을 함께 보여주세요.
-* 결제수량은 결제 의 id 갯수 를 의미합니다.
-* 
+--결제수량은 결제 의 id 갯수 를 의미합니다.
+
 select substring(cast(payment_date as varchar), 1,4) as year,
 substring(cast(payment_date as varchar),1,10) as date, 
 count(payment_id) as cnt 

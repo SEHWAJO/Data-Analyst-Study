@@ -75,3 +75,12 @@ group by grouping sets (
 select store_id, active, count(customer_id)
 from customer c 
 group by grouping sets((store_id, active), (active));
+                        
+--문제10번) 지점 별, active 고객의 수와 , active 고객 수 를 함께 보여주세요. 지점과, active 여부에 대해서는 customer 테이블을 이용하여 보여주세요.
+-- * roll up으로 풀이해보면서, grouping sets 과의 차이를 확인해보세요.
+
+select store_id, active, count(customer_id) as cnt
+from customer c 
+group by rollup(store_id, active)
+;
+

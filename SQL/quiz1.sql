@@ -21,3 +21,12 @@ from orders
 where customerid =1001
 and employeeid=707
 order by ordernumber ASC
+
+--문제6번)  vendors 테이블을 이용하여, 벤더가 위치한 state 주가 어떻게 되는지, 확인해보세요.  중복된 주가 있다면, 중복제거 후에 알려주세요.
+select distinct vendstate
+from vendors v
+
+--문제7번) 주문일자가  2017-09-02~ 09-03일 사이에 해당하는 주문 번호를 알려주세요.
+select ordernumber
+from orders
+where orderdate between '2017-09-02' and '2017-09-03'

@@ -13,3 +13,11 @@ order by orderdate desc
 
 select first_name ||', '|| last_name  as  full_name
 from customer
+
+--문제5번) orders 테이블을 활용하여, 고객번호가 1001 에 해당하는 사람이 employeeid 가 707인 직원으로부터  산 주문의 id 와 주문 날짜를 알려주세요.
+* 주문일자 빠른순으로 정렬하여, 보여주세요.
+select ordernumber, orderdate
+from orders
+where customerid =1001
+and employeeid=707
+order by ordernumber ASC

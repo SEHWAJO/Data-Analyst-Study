@@ -46,3 +46,8 @@ select *, coalesce(productdescription, 'None') as new_productdescription
 from products
 where productdescription is NULL
 ;
+
+--문제9 번) vendors 테이블을 이용하여, vendor의 State 지역이 NY 또는 WA 인 업체의 이름을 알려주세요.
+select vendname
+from vendors 
+where vendstate in ('NY', 'WA')

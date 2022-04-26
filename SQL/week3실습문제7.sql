@@ -1,19 +1,19 @@
 
--— 문제1번) 대여점(store)별 영화 재고(inventory) 수량과 전체 영화 재고 수량은? (grouping sets)
+-- 문제1번) 대여점(store)별 영화 재고(inventory) 수량과 전체 영화 재고 수량은? (grouping sets)
 
 SELECT store_id , count(*)
 FROM inventory i 
 GROUP BY GROUPING SETS ((store_id),())
 
 
--— 문제2번) 대여점(store)별 영화 재고(inventory) 수량과 전체 영화 재고 수량은? (rollup)
+-- 문제2번) 대여점(store)별 영화 재고(inventory) 수량과 전체 영화 재고 수량은? (rollup)
 
 SELECT store_id , count(*)
 FROM inventory i 
 GROUP BY rollup (store_id)
 
 
-—- 문제3번) 국가(country)별 도시(city)별 매출액, 국가(country)매출액 소계 그리고 전체 매출액을 구하세요. (grouping sets)
+-- 문제3번) 국가(country)별 도시(city)별 매출액, 국가(country)매출액 소계 그리고 전체 매출액을 구하세요. (grouping sets)
 
 SELECT country, city, sum(amount)
 FROM payment p 
@@ -25,7 +25,7 @@ GROUP BY grouping sets (country, city), (country), ()
 ORDER BY country, city
 
 
-—- 신기하게 이렇게 써도 된다.
+-- 신기하게 이렇게 써도 된다.
 
 SELECT c3.country, c2.city, sum(p.amount)
 FROM payment p 
@@ -37,7 +37,7 @@ GROUP BY GROUPING SETS (country, city), (country), ()
 ORDER BY country
 
 
-—- 문제4번) 국가(country)별 도시(city)별 매출액, 국가(country)매출액 소계 그리고 전체 매출액을 구하세요. (rollup)
+-- 문제4번) 국가(country)별 도시(city)별 매출액, 국가(country)매출액 소계 그리고 전체 매출액을 구하세요. (rollup)
 
 SELECT country, city, sum(amount)
 FROM payment p 
@@ -49,14 +49,14 @@ group by rollup (country, city)
 ORDER BY country, city
 
 
--— 문제5번) 영화배우별로  출연한 영화 count 수 와,   모든 배우의 전체 출연 영화 수를 합산 해서 함께 보여주세요.
+-- 문제5번) 영화배우별로  출연한 영화 count 수 와,   모든 배우의 전체 출연 영화 수를 합산 해서 함께 보여주세요.
 
 SELECT actor_id, count(DISTINCT fa.film_id)
 FROM film_actor fa 
 GROUP by GROUPING SETS ((actor_id),())
 
 
--— 문제6번) 국가 (Country)별, 도시(City)별  고객의 수와 ,  전체 국가별 고객의 수를 함께 보여주세요. (grouping sets)
+-- 문제6번) 국가 (Country)별, 도시(City)별  고객의 수와 ,  전체 국가별 고객의 수를 함께 보여주세요. (grouping sets)
 
 SELECT country, city, count(customer_id)
 FROM customer c
@@ -66,7 +66,7 @@ JOIN country c3 ON c2.country_id = c3.country_id
 GROUP BY GROUPING SETS ((country, city), (country), ())
 
 
--— 문제7번) 영화에서 사용한 언어와  영화 개봉 연도 에 대한 영화  갯수와  , 영화 개봉 연도에 대한 영화 갯수를 함께 보여주세요.
+-- 문제7번) 영화에서 사용한 언어와  영화 개봉 연도 에 대한 영화  갯수와  , 영화 개봉 연도에 대한 영화 갯수를 함께 보여주세요.
 
 select language_id, release_year, count(film_id)
 from film f 
